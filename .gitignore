@@ -47,3 +47,5 @@ Temporary Items
 .apdisk
 *.class
 *.class
+build/classes/comicfx/ComicFXMLDocumentController.class
+*.class

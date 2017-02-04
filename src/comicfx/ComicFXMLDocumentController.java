@@ -78,6 +78,10 @@ public class ComicFXMLDocumentController implements Initializable {
     @FXML 
     private Label pageNumLabel;
     
+    @FXML
+    private ScrollPane comicPagePane;
+            
+    
     
     
     
@@ -128,9 +132,12 @@ public class ComicFXMLDocumentController implements Initializable {
                     JBook tempBook = new JBook(readBook, currentPath, w, h);
                     if (tempBook != null) {  
                         comicBookNavigator = tempBook.getNavigator();
+                        String title = tempBook.getTitle();
                         comicPageStack = new JComicPageStack( comicBookNavigator );
                         this.maxPages = comicPageStack.size();
+                        System.out.println("Loaded comic. This title: " + title + "  has: (" + (comicPageStack.size() + 1) + ") pages available");
                         showFirstPage();
+                        
                         
                     }
                 } catch (IOException ex) {
@@ -153,20 +160,30 @@ public class ComicFXMLDocumentController implements Initializable {
     
     @FXML
     public void showNextPage() {
+        
         pagePointer++;
         if( pagePointer >= this.maxPages ) {
-            pagePointer = this.maxPages - 1;  
-            this.prevButton.setVisible(false);
+            pagePointer = this.maxPages - 1;              
+        }
+        
+        if ( pagePointer == 0) {
+            this.prevButton.setDisable(true);
         }
         else {
-            this.prevButton.setVisible(true);
+            this.prevButton.setDisable(false);
         }
+            
         this.pageNumLabel.setText("Page: " + String.valueOf(pagePointer));
         BufferedImage bi = comicPageStack.get(pagePointer);
-        WritableImage wr =  new WritableImage(bi.getWidth(), bi.getHeight());
+        // WritableImage wr =  new WritableImage(bi.getWidth(), bi.getHeight());
         Image image = SwingFXUtils.toFXImage(bi, null);        
         this.ComicPageView.setImage(image);
-        this.ComicPageView.resize(900, 700);                
+        // this.ComicPageView.resize(900, 700); 
+        this.comicPagePane.setContent(null);
+        this.comicPagePane.setContent(ComicPageView);
+        // this.comicPagePane.setPrefWidth(bi.getWidth());
+        // this.comicPagePane.setPrefHeight(bi.getHeight());
+        
     }
 
     @FXML
@@ -174,14 +191,21 @@ public class ComicFXMLDocumentController implements Initializable {
         pagePointer--;
         if( pagePointer <= 0  ) {
             pagePointer = 0;
-        }       
-        this.nextButton.setVisible(true);
+            this.nextButton.setDisable(false);
+        }
+        else {
+            this.nextButton.setDisable(false);
+        }
         this.pageNumLabel.setText("Page: " + String.valueOf(pagePointer));
         BufferedImage bi = comicPageStack.get(pagePointer);
-        WritableImage wr =  new WritableImage(bi.getWidth(), bi.getHeight());
+        // WritableImage wr =  new WritableImage(bi.getWidth(), bi.getHeight());
         Image image = SwingFXUtils.toFXImage(bi, null);        
         this.ComicPageView.setImage(image);
-        this.ComicPageView.resize(900, 700);
+        // this.ComicPageView.resize(900, 700);
+        this.comicPagePane.setContent(null);
+        this.comicPagePane.setContent(ComicPageView);
+        // this.comicPagePane.setPrefWidth(bi.getWidth());
+        // this.comicPagePane.setPrefHeight(bi.getHeight());
         
         
     }
