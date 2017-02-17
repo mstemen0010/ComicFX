@@ -5,6 +5,7 @@
  */
 package comicfx;
 
+import comicfx.epubLibLite.Librarian;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -36,10 +37,9 @@ public class JComicPageStack  extends ArrayList<BufferedImage>{
     int currentPageNumber = 0;
     private Book myBook;
     
-    JComicPageStack(Navigator myNavigator) {
+    JComicPageStack( Librarian libr ) {
         
-        // retrieve all the images and convert them to pages
-        myBook = myNavigator.getBook();        
+        // retrieve all the images and convert them to pages            
         Spine spine = myBook.getSpine();
         TableOfContents toc = myBook.getTableOfContents();
         // List<Resource> tocr = toc.getTocReferences();

@@ -5,6 +5,7 @@
  */
 package comicfx;
 
+import comicfx.epubLibLite.Librarian;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,8 +59,7 @@ public class ComicFXMLDocumentController implements Initializable {
     private int maxPages =0;
     private int pageNumber = 1;
     JComicPageStack comicPageStack;
-    Navigator comicBookNavigator;
-    int pagePointer = 0;
+     int pagePointer = 0;
                
     @FXML
     private ImageView ComicPageView;
@@ -91,11 +92,7 @@ public class ComicFXMLDocumentController implements Initializable {
         
         
     }    
-    
-    private void loadInNewComicEpub() {
-        
-        comicPageStack = new JComicPageStack(comicBookNavigator);
-    }
+      
     
     @FXML
     public void setComicPath(ActionEvent ae) {
@@ -128,12 +125,14 @@ public class ComicFXMLDocumentController implements Initializable {
                 if (reader != null) {
                 try {
                     // Book book = (new EpubReader()).readEpub(new FileInputStream(selectedFile));\
+                    
                     Book readBook = ePubReader.readEpub(fs);
-                    JBook tempBook = new JBook(readBook, currentPath, w, h);
-                    if (tempBook != null) {  
-                        comicBookNavigator = tempBook.getNavigator();
-                        String title = tempBook.getTitle();
-                        comicPageStack = new JComicPageStack( comicBookNavigator );
+                    Librarian librarian = Librarian.getLibrarian(comicFile);
+                    List<BufferedImage> pages = librarian.getPages();
+                    comicPageStack = new JComicPageStack(librarian);
+                    if (librarian != null) {                          
+                        String title = "Fill me in";
+                        comicPageStack = new JComicPageStack( librarian );
                         this.maxPages = comicPageStack.size();
                         System.out.println("Loaded comic. This title: " + title + "  has: (" + (comicPageStack.size() + 1) + ") pages available");
                         showFirstPage();
