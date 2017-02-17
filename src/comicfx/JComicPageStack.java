@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
@@ -21,6 +22,9 @@ import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.MediaType;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.domain.Resources;
+import nl.siegmann.epublib.domain.Spine;
+import nl.siegmann.epublib.domain.TOCReference;
+import nl.siegmann.epublib.domain.TableOfContents;
 import nl.siegmann.epublib.service.MediatypeService;
 
 /**
@@ -36,10 +40,16 @@ public class JComicPageStack  extends ArrayList<BufferedImage>{
         
         // retrieve all the images and convert them to pages
         myBook = myNavigator.getBook();        
+        Spine spine = myBook.getSpine();
+        TableOfContents toc = myBook.getTableOfContents();
+        // List<Resource> tocr = toc.getTocReferences();
+        List<TOCReference> tocr = toc.getTocReferences();
         Resources bookResources = myBook.getResources();
+        Map<String, Resource> stuff = bookResources.getResourceMap();
         List<Resource> gifImageResources = bookResources.getResourcesByMediaType(MediatypeService.GIF);
         List<Resource> jpgImageResources = bookResources.getResourcesByMediaType(MediatypeService.JPG);
         List<Resource> pngImageResources = bookResources.getResourcesByMediaType(MediatypeService.PNG);
+         List<Resource> sortedJpgImageResources = this.sortImageResources(jpgImageResources);
         Iterator<Resource> itr = jpgImageResources.iterator();
         int imageCount = 0;
         while( itr.hasNext() ) {
@@ -62,6 +72,33 @@ public class JComicPageStack  extends ArrayList<BufferedImage>{
                 
         }
         
+    }
+    
+    public List<Resource> sortImageResources( List<Resource>  imagesToSort ) {
+        List<Resource> sortedImageResources = new ArrayList<Resource>();
+        int sortIndex = 1;
+        
+        Iterator<Resource> itr = imagesToSort.iterator();
+        while( itr.hasNext() ) {
+            String sortIndexAsStr = String.valueOf(sortIndex);
+            // now find that "index" image
+            Iterator<Resource> itri = imagesToSort.iterator();
+            boolean indexFound = false;
+            while( itri.hasNext() && ! indexFound ) {
+                Resource currRes = itri.next();
+                String href = currRes.getHref();
+                if( href != null && href.contains(sortIndexAsStr)) {
+                    sortedImageResources.add(currRes);
+                    indexFound = true;
+                }
+            }
+            
+            
+            sortIndex++;
+        }
+        
+        
+        return sortedImageResources;
     }
 
     void setChapterContents(Resource chapRes) {
