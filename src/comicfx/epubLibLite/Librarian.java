@@ -49,6 +49,7 @@ public class Librarian {
         if (librarian == null) {
             librarian = new Librarian();
             librarian.setEpub(epubFile);
+            clearPageList();
             librarian.buildPages(epubFile);
         }
         return librarian;
@@ -60,8 +61,7 @@ public class Librarian {
     protected static void clearPageList() {
         if (pages != null) {
             pages.clear();
-            zipEntryMap.clear();
-            pages = null;
+            zipEntryMap.clear();           
         }
     }
     

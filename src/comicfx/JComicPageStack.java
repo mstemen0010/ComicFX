@@ -40,36 +40,14 @@ public class JComicPageStack  extends ArrayList<BufferedImage>{
     JComicPageStack( Librarian libr ) {
         
         // retrieve all the images and convert them to pages            
-        Spine spine = myBook.getSpine();
-        TableOfContents toc = myBook.getTableOfContents();
-        // List<Resource> tocr = toc.getTocReferences();
-        List<TOCReference> tocr = toc.getTocReferences();
-        Resources bookResources = myBook.getResources();
-        Map<String, Resource> stuff = bookResources.getResourceMap();
-        List<Resource> gifImageResources = bookResources.getResourcesByMediaType(MediatypeService.GIF);
-        List<Resource> jpgImageResources = bookResources.getResourcesByMediaType(MediatypeService.JPG);
-        List<Resource> pngImageResources = bookResources.getResourcesByMediaType(MediatypeService.PNG);
-         List<Resource> sortedJpgImageResources = this.sortImageResources(jpgImageResources);
-        Iterator<Resource> itr = jpgImageResources.iterator();
+        Iterator<BufferedImage> itr = libr.getPages().iterator();
         int imageCount = 0;
         while( itr.hasNext() ) {
-            Resource r = itr.next();
-            // check to see if this is an image type of resource
-           
+            BufferedImage r = itr.next();
+            // check to see if this is an image type of resource           
             if( r != null ) {
-                MediaType rType = r.getMediaType();
-                if( rType == MediatypeService.JPG || rType== MediatypeService.PNG || rType == MediatypeService.GIF ) {            
-                    try {
-                        byte[] ba = r.getData();
-                        BufferedImage bufIm = ImageIO.read(new ByteArrayInputStream(ba));       
-                        this.add(bufIm);
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(JComicPageStack.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-                
+                this.add(r);
+            }                           
         }
         
     }

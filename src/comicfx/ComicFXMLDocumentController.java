@@ -125,14 +125,12 @@ public class ComicFXMLDocumentController implements Initializable {
                 if (reader != null) {
                 try {
                     // Book book = (new EpubReader()).readEpub(new FileInputStream(selectedFile));\
-                    
-                    Book readBook = ePubReader.readEpub(fs);
-                    Librarian librarian = Librarian.getLibrarian(comicFile);
+                                        
+                    Librarian librarian = Librarian.getLibrarian(comicFile);                    
                     List<BufferedImage> pages = librarian.getPages();
                     comicPageStack = new JComicPageStack(librarian);
                     if (librarian != null) {                          
-                        String title = "Fill me in";
-                        comicPageStack = new JComicPageStack( librarian );
+                        String title = "Fill me in";                        
                         this.maxPages = comicPageStack.size();
                         System.out.println("Loaded comic. This title: " + title + "  has: (" + (comicPageStack.size() + 1) + ") pages available");
                         showFirstPage();
