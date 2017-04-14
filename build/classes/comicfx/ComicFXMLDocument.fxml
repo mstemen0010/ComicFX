@@ -10,37 +10,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane styleClass="flat-back-3" stylesheets="@style/Flatfxml.css" text="ComicFx 1.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comicfx.ComicFXMLDocumentController">
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="flat-back-2" stylesheets="@style/Flatfxml.css" text="ComicFx 1.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comicfx.ComicFXMLDocumentController">
    <content>
       <AnchorPane id="AnchorPane" styleClass="flat-back-4" stylesheets="@style/Flatfxml.css">
           <children>
-            <Pane layoutX="16.0" prefHeight="150.0" prefWidth="878.0" styleClass="flat-back-3" AnchorPane.leftAnchor="10.400000000000091" AnchorPane.rightAnchor="154.0">
+            <Pane layoutX="16.0" styleClass="flat-back-3">
                <children>
                   <ImageView fitHeight="91.0" fitWidth="88.0" layoutX="7.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@art/ComicFxIcon_1_sm.jpg" />
                      </image>
                   </ImageView>
-                  <Button fx:id="browseButton" layoutX="772.0" layoutY="91.0" mnemonicParsing="false" onAction="#setComicPath" styleClass="mainFxmlClass" text="Browse..." />
                </children>
             </Pane>
             <Pane layoutX="30.399999618530273" layoutY="154.39999389648438" AnchorPane.leftAnchor="30.399999618530273" AnchorPane.topAnchor="154.39999389648438">
                <children>
-                  <ScrollPane fx:id="comicPagePane" hbarPolicy="ALWAYS" prefHeight="1215.0" prefViewportWidth="798.2222290039062" prefWidth="877.0" styleClass="mainFxmlClass" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="97.0" AnchorPane.rightAnchor="145.0">
+                  <ScrollPane fx:id="comicPagePane" hbarPolicy="ALWAYS" layoutX="-24.0" layoutY="-36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefViewportWidth="798.2222290039062" prefWidth="700.0" styleClass="mainFxmlClass" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="24.0">
                      <content>
-                        <ImageView fx:id="ComicPageView" fitHeight="963.0" fitWidth="655.0" layoutX="8.0" layoutY="132.0" pickOnBounds="true" styleClass="flat-back-2" AnchorPane.leftAnchor="967.4000000000001" AnchorPane.topAnchor="1397.4">
+                        <ImageView fx:id="ComicPageView" fitHeight="600.0" fitWidth="500.0" layoutX="8.0" layoutY="132.0" pickOnBounds="true" styleClass="flat-back-2" AnchorPane.leftAnchor="967.4000000000001" AnchorPane.topAnchor="1397.4">
                            <image>
-                              <Image url="@art/ALandCalledJuneWMSMock.jpg" />
+                              <Image url="@art/FinalALCJMockComic_1.jpg" />
                            </image>
                            <effect>
                               <Blend mode="COLOR_BURN" />
                            </effect>
+                           <viewport>
+                              <Rectangle2D height="600.0" width="500.0" />
+                           </viewport>
                         </ImageView>
                      </content>
                   </ScrollPane>
                </children>
             </Pane>
-            <Pane layoutX="32.0" layoutY="1376.0" prefHeight="96.0" prefWidth="894.0" styleClass="flat-back-3" AnchorPane.leftAnchor="39.999999618530275" AnchorPane.rightAnchor="145.0000003814697">
+            <Pane layoutX="16.0" layoutY="943.0" prefHeight="96.0" prefWidth="894.0" styleClass="flat-back-3" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="188.1999999999997">
                <children>
                   <Label fx:id="pageNumLabel" alignment="CENTER" layoutX="797.0" layoutY="57.0" prefHeight="32.0" prefWidth="84.0" styleClass="flat-button-5-18" text="Page: 1" />
                     <Button fx:id="nextButton" disable="true" layoutX="829.0" layoutY="7.0" onAction="#showNextPage" styleClass="mainFxmlClass" text="Next" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="13.73046875">
@@ -53,6 +55,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </Button>
+                  <Button fx:id="browseButton" layoutX="645.0" layoutY="8.0" mnemonicParsing="false" onAction="#setComicPath" styleClass="mainFxmlClass" text="Browse..." />
                </children>
             </Pane>
           </children>

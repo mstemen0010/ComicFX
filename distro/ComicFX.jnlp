@@ -5,18 +5,14 @@
     <vendor>matthew.stemen</vendor>
     <description>null</description>
     <offline-allowed/>
-  <shortcut><desktop/></shortcut>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ComicFX.jar" size="2657683" download="eager" />
-    <jar href="lib\commons-io-2.5.jar" size="221311" download="eager" />
-    <jar href="lib\epublib-core-3.1.jar" size="303664" download="eager" />
-    <jar href="lib\slf4j-api-1.6.1.jar" size="29385" download="eager" />
+    <jar href="ComicFX.jar" size="2654804" download="eager" />
+    <jar href="lib\commons-io-2.5.jar" size="208696" download="eager" />
+    <jar href="lib\epublib-core-3.1.jar" size="286259" download="eager" />
+    <jar href="lib\slf4j-api-1.6.1.jar" size="25496" download="eager" />
   </resources>
-<security>
-  <all-permissions/>
-</security>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ComicFX" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>

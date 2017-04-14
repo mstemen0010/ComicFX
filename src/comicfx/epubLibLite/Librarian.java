@@ -88,7 +88,7 @@ public class Librarian {
 
         clearPageList();
         while ((entry = zis.getNextEntry()) != null) {
-            if (entry.getName().toLowerCase().contains("jpg") || entry.getName().toLowerCase().contains("png")) {
+            if (entry.getName().toLowerCase().contains("jpg") || entry.getName().toLowerCase().contains("png") || entry.getName().toLowerCase().contains("jpeg") || entry.getName().toLowerCase().contains("jpeg") ) {
                 System.out.println("Got image: " + entry.getName());
 
             } else if (!entry.getName().contains("class")) {
